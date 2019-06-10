@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 
 
 public class DialogWin770 extends JFrame implements ActionListener{
-	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover;
+	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover,removeCover,toShabat;
 	JLabel title,junction;
 	String[] junctionStrings = {"צומת 1","צומת 2","צומת3","צומת 4"};
 	JComboBox<String> list = new JComboBox<String>(junctionStrings);
@@ -81,6 +81,16 @@ public class DialogWin770 extends JFrame implements ActionListener{
         takeCover.setFont(new Font("Segoe UI",Font.BOLD,12));
         add(takeCover);
         takeCover.addActionListener(this);
+        removeCover = new JButton("הורד שליטה");
+        removeCover.setBounds(57, 252, 105, 35);
+        removeCover.setFont(new Font("Segoe UI",Font.BOLD,12));
+        add(removeCover);
+        removeCover.addActionListener(this);
+        toShabat = new JButton("העבר למצב שבת");
+        toShabat.setBounds(220, 202, 130, 35);
+        toShabat.setFont(new Font("Segoe UI",Font.BOLD,12));
+        add(toShabat);
+        toShabat.addActionListener(this);
        setVisible(true);
     }
 
@@ -137,6 +147,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
             	}
         }
 		else if (((JButton) e.getSource()).getText().equals("קח שליטה")) {
+			myDialog.bufferSocketOut.println(choose + "קח שליטה");
 			switch (choose) {
 			case "צומת 1":
 				takes[0] =  true;
@@ -152,7 +163,27 @@ public class DialogWin770 extends JFrame implements ActionListener{
 				break;
 			}
         }
-    
+		else if (((JButton) e.getSource()).getText().equals("הורד שליטה")) {
+			myDialog.bufferSocketOut.println(choose + "הורד שליטה");
+			switch (choose) {
+			case "צומת 1":
+				takes[0] =  false;
+				break;
+			case "צומת 2":
+				takes[1] =  false;
+				break;
+			case "צומת 3":
+				takes[2] =  false;
+				break;
+			case "צומת 4":
+				takes[3] =  false;
+				break;
+			}
+        }
+		else if (((JButton) e.getSource()).getText().equals("העבר למצב שבת")) {
+        		if(takes[place])
+    			myDialog.bufferSocketOut.println(choose + " " + "העבר למצב שבת");
+        }
 		}
 		
 	}
