@@ -421,7 +421,7 @@ public class Controller  extends Thread
 						evack13.waitEvent();evack12.waitEvent();evack7.waitEvent();
 						evack6.waitEvent();evack1.waitEvent();
 						break;
-					}
+					} 
 					chngeTheRole.waitEvent();
 					if(chngeState1.arrivedEvent())
 					{
