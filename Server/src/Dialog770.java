@@ -20,6 +20,7 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
     PrintWriter bufferSocketOut;
     DialogWin770 myOutput;
     
+    
     public Dialog770(Socket clientSocket, Server770 myServer)
     {
         client = clientSocket;
