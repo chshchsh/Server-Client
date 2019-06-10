@@ -79,6 +79,7 @@ public class CarMooving extends Thread
 			}
 			myPanel.repaint();
 		}
+		//where_the_car_go();
 
 	}
 	private boolean finish() 
@@ -148,6 +149,25 @@ public class CarMooving extends Thread
 		}
 		return null;
 	}
+	
+	private void where_the_car_go() {
+		switch (key) 
+		{
+		case 1:
+			//לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לשמאל 
+			
+		case 2:
+			// לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לשמאל רק מכונית מלמטה 
 
+		case 3:
+			//לא צריך לעשות שום דבר 
+		case 4:
+			// לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לימין
+			
+		default:
+			break;
+		}
+		
+	}
 
 }
