@@ -20,8 +20,9 @@ public class BuildTrafficLight
 	    PrintWriter bufferSocketOut;
 	    String line;
 	    
-	    String name = JOptionPane.showInputDialog("שם הצומת");
-
+	    String number = JOptionPane.showInputDialog("שם הצומת");
+	    String name = "צומת " + number;
+	    
 		final int numOfLights=4+12+1;
 		ShloshaAvot listThree[] = new ShloshaAvot[4];
 		ShneyLuchot listTwo[] = new ShneyLuchot[12];
@@ -108,9 +109,43 @@ public class BuildTrafficLight
 	            while (true)
 	            {
 	                line = bufferSocketIn.readLine(); // reads a line from the server
-	                if (line == null)  // connection is closed ?  exit
-	                {
-	                    break;
+	                switch(line) {
+	                case "צומת 1 העבר למצב 1":
+	                	break;
+	                case "צומת 1 העבר למצב 2":
+	                	break;
+	                case "צומת 1 העבר למצב 3":
+	                	break;
+	                case "צומת 2 העבר למצב 1":
+	                	break;
+	                case "צומת 2 העבר למצב 2":
+	                	break;
+	                case "צומת 2 העבר למצב 3":
+	                	break;
+	                case "צומת 3 העבר למצב 1":
+	                	break;
+	                case "צומת 3 העבר למצב 2":
+	                	break;
+	                case "צומת 3 העבר למצב 3":
+	                	break;
+	                case "צומת 1קח שליטה":
+	                	break;
+	                case "צומת 2קח שליטה":
+	                	break;
+	                case "צומת 3קח שליטה":
+	                	break;
+	                case "הורד שליטהצומת 1":
+	                	break;
+	                case "הורד שליטהצומת 2":
+	                	break;
+	                case "הורד שליטהצומת 3":
+	                	break;
+	                case "העבר למצב שבת צומת 1":
+	                	break;
+	                case "העבר למצב שבת צומת 2":
+	                	break;
+	                case "העבר למצב שבת צומת 3":
+	                	break;
 	                }
 	            }
 	        } catch (IOException e)

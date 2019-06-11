@@ -21,7 +21,7 @@ public class Controller  extends Thread
 	,evShabat9 = new Event64(),evShabat10 = new Event64(),evShabat11 = new Event64(),evShabat12 = new Event64(),evShabat13 = new Event64(),evShabat14 = new Event64(),evShabat15 = new Event64()
 			,stopEvShabat0 = new Event64(),stopEvShabat1 = new Event64(),stopEvShabat2 = new Event64(),stopEvShabat3 = new Event64(),stopEvShabat4 = new Event64(),stopEvShabat5 = new Event64(),stopEvShabat6 = new Event64(),stopEvShabat7 = new Event64(),stopEvShabat8 = new Event64()
 			,stopEvShabat9 = new Event64(),stopEvShabat10 = new Event64(),stopEvShabat11 = new Event64(),stopEvShabat12 = new Event64(),stopEvShabat13 = new Event64(),stopEvShabat14 = new Event64(),stopEvShabat15 = new Event64();
-	Event64 chngeToRole = new Event64(),chngeTheRole = new Event64(),chngeState1= new Event64(),chngeState2 = new Event64(),chngeState3 = new Event64();
+	Event64 changeRole = new Event64(),changeStates = new Event64(),changeState1= new Event64(),changeState2 = new Event64(),changeState3 = new Event64();
 	
 	public Controller (ShloshaAvot listThree[] ,ShneyLuchot listTwo[],MyActionListener myListener) {
 		this.listThree = listThree;
@@ -49,7 +49,7 @@ public class Controller  extends Thread
 		start();
 	}
 	public void ChangeToRole() {
-		chngeToRole.sendEvent();
+		changeRole.sendEvent();
 	}
 	public void run()
 	{
@@ -84,9 +84,9 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -104,9 +104,9 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -139,9 +139,9 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -175,9 +175,9 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -198,9 +198,9 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -236,9 +236,9 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -256,9 +256,9 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(chngeToRole.arrivedEvent())
+							if(changeRole.arrivedEvent())
 							{
-								chngeToRole.waitEvent();
+								changeRole.waitEvent();
 								out=true;
 								outState=OutState.Role;
 							}
@@ -362,7 +362,6 @@ public class Controller  extends Thread
 					state = State.green0;
 					break;
 					
-					
 				case Role:
 					switch(state)
 					{
@@ -422,25 +421,25 @@ public class Controller  extends Thread
 						evack6.waitEvent();evack1.waitEvent();
 						break;
 					} 
-					chngeTheRole.waitEvent();
-					if(chngeState1.arrivedEvent())
+					changeStates.waitEvent();
+					if(changeState1.arrivedEvent())
 					{
-						chngeState1.waitEvent();
+						changeState1.waitEvent();
 						situation=Situation.state1;
 					}
-					if(chngeState2.arrivedEvent())
+					else if(changeState2.arrivedEvent())
 					{
-						chngeState2.waitEvent();
+						changeState2.waitEvent();
 						situation=Situation.state2;
 					}
-					if(chngeState3.arrivedEvent())
+					else if(changeState3.arrivedEvent())
 					{
-						chngeState3.waitEvent();
+						changeState3.waitEvent();
 						situation=Situation.state3;
 					}
-					if(chngeToRole.arrivedEvent())
+					if(changeRole.arrivedEvent())
 					{
-						chngeToRole.waitEvent();
+						changeRole.waitEvent();
 						out=false;
 						outState=OutState.regularDay;
 						state = State.green0;
@@ -467,32 +466,30 @@ public class Controller  extends Thread
 					break;
 					}
 					sleep(5000);
-					chngeTheRole.waitEvent();
-					if(chngeState1.arrivedEvent())
+					changeStates.waitEvent();
+					if(changeState1.arrivedEvent())
 					{
-						chngeState1.waitEvent();
+						changeState1.waitEvent();
 						situation=Situation.state1;
 					}
-					if(chngeState2.arrivedEvent())
+					else if(changeState2.arrivedEvent())
 					{
-						chngeState2.waitEvent();
+						changeState2.waitEvent();
 						situation=Situation.state2;
 					}
-					if(chngeState3.arrivedEvent())
+					else if(changeState3.arrivedEvent())
 					{
-						chngeState3.waitEvent();
+						changeState3.waitEvent();
 						situation=Situation.state3;
 					}
-					if(chngeToRole.arrivedEvent())
+					else if(changeRole.arrivedEvent())
 					{
-						chngeToRole.waitEvent();
+						changeRole.waitEvent();
 						out=false;
 						outState=OutState.regularDay;
 						state = State.green0;
 					}
-					
-					
-					
+							
 			}
 		}
 			
