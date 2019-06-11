@@ -105,7 +105,8 @@ public class BuildTrafficLight
 	            bufferSocketOut = new PrintWriter(
 	                    new BufferedWriter(
 	                    new OutputStreamWriter(
-	                    clientSocket.getOutputStream())), true);        
+	                    clientSocket.getOutputStream())), true);
+	            bufferSocketOut.println(name);
 	            while (true)
 	            {
 	                line = bufferSocketIn.readLine(); // reads a line from the server
