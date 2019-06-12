@@ -13,7 +13,7 @@ import java.net.*;
 public class BuildTrafficLight
 {
 	public void doit() {
-		String SERVERHOST = "localhost";
+		String SERVERHOST = "127.0.0.1";
 	    int DEFAULT_PORT = 770;
 	    Socket clientSocket = null;
 	    BufferedReader bufferSocketIn;
@@ -48,7 +48,7 @@ public class BuildTrafficLight
 
 		ramzorim[16]=new Ramzor(1,30,555,645);
 
-		TrafficLightFrame tlf=new TrafficLightFrame("  installation of traffic lights",ramzorim);
+		TrafficLightFrame tlf=new TrafficLightFrame(name,ramzorim);
 
 		for (int i = 0; i<4 ; i++) {
 			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i+1);
@@ -112,34 +112,49 @@ public class BuildTrafficLight
 	                line = bufferSocketIn.readLine(); // reads a line from the server
 	                switch(line) {
 	                case "צומת 1 העבר למצב 1":
+	                	controller.toState1();
 	                	break;
 	                case "צומת 1 העבר למצב 2":
+	                	controller.toState2();
 	                	break;
 	                case "צומת 1 העבר למצב 3":
+	                	controller.toState3();
 	                	break;
 	                case "צומת 2 העבר למצב 1":
+	                	controller.toState1();
 	                	break;
 	                case "צומת 2 העבר למצב 2":
+	                	controller.toState2();
 	                	break;
 	                case "צומת 2 העבר למצב 3":
+	                	controller.toState3();
 	                	break;
 	                case "צומת 3 העבר למצב 1":
+	                	controller.toState1();
 	                	break;
 	                case "צומת 3 העבר למצב 2":
+	                	controller.toState2();
 	                	break;
 	                case "צומת 3 העבר למצב 3":
+	                	controller.toState3();
 	                	break;
 	                case "צומת 1קח שליטה":
+	                	controller.ChangeToRole();
 	                	break;
 	                case "צומת 2קח שליטה":
+	                	controller.ChangeToRole();
 	                	break;
 	                case "צומת 3קח שליטה":
+	                	controller.ChangeToRole();
 	                	break;
-	                case "הורד שליטהצומת 1":
+	                case "צומת 1הורד שליטה":
+	                	controller.ChangeToRole();
 	                	break;
-	                case "הורד שליטהצומת 2":
+	                case "צומת 2הורד שליטה":
+	                	controller.ChangeToRole();
 	                	break;
-	                case "הורד שליטהצומת 3":
+	                case "צומת 3הורד שליטה":
+	                	controller.ChangeToRole();
 	                	break;
 	                case "העבר למצב שבת צומת 1":
 	                	break;

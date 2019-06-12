@@ -46,7 +46,7 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
             System.err.println("server:Exception when opening sockets: " + e);
             return;
         }
-        myOutput = new DialogWin770("Dialog Win for: " + client.toString(), this);
+        myOutput = new DialogWin770(this);
         start();
     }
 

@@ -2,7 +2,7 @@ import javax.swing.JRadioButton;
 
 public class Controller  extends Thread
 {
-	enum State {green0,green1_2,green2_3,turn_0_red,turn_3_red,turn1_2red,from12_to_23,from23_to_0,condition1,condition2};
+	enum State {green0,green1_2,green2_3,turn_0_red,turn_3_red,turn1_2red,from12_to_23,from23_to_0,condition1,condition2,turn_23_red};
 	enum Situation {state1,state2,state3};
 	enum OutState {regularDay,Shabat,Role};
 	State state;
@@ -22,6 +22,8 @@ public class Controller  extends Thread
 			,stopEvShabat0 = new Event64(),stopEvShabat1 = new Event64(),stopEvShabat2 = new Event64(),stopEvShabat3 = new Event64(),stopEvShabat4 = new Event64(),stopEvShabat5 = new Event64(),stopEvShabat6 = new Event64(),stopEvShabat7 = new Event64(),stopEvShabat8 = new Event64()
 			,stopEvShabat9 = new Event64(),stopEvShabat10 = new Event64(),stopEvShabat11 = new Event64(),stopEvShabat12 = new Event64(),stopEvShabat13 = new Event64(),stopEvShabat14 = new Event64(),stopEvShabat15 = new Event64();
 	Event64 changeRole = new Event64(),changeStates = new Event64(),changeState1= new Event64(),changeState2 = new Event64(),changeState3 = new Event64();
+	boolean stop = false;
+	boolean red = true;
 	
 	public Controller (ShloshaAvot listThree[] ,ShneyLuchot listTwo[],MyActionListener myListener) {
 		this.listThree = listThree;
@@ -73,7 +75,6 @@ public class Controller  extends Thread
 						switch(state)
 						{
 						case green0:
-							MyActionListener.flag=false;
 							if(ButtonRegel.arrivedEvent()) {
 								data = ButtonRegel.waitEvent();
 							}
@@ -127,7 +128,6 @@ public class Controller  extends Thread
 							}
 							break;
 						case green2_3:
-							MyActionListener.flag=false;
 							if(ButtonRegel.arrivedEvent()) {
 								data = ButtonRegel.waitEvent();
 							}
@@ -277,6 +277,12 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
+							if(changeRole.arrivedEvent())
+							{
+								changeRole.waitEvent();
+								out=true;
+								outState=OutState.Role;
+							}
 							else {
 							//evack(13,12,7,6,1)/evChengeGreen(14,15,11,8,3)
 							evack13.waitEvent();evack12.waitEvent();evack7.waitEvent();
@@ -289,6 +295,7 @@ public class Controller  extends Thread
 						
 						}
 					}
+					break;
 				case Shabat:
 					//evChengeRed(0-15)
 					switch(state)
@@ -422,6 +429,7 @@ public class Controller  extends Thread
 						break;
 					} 
 					changeStates.waitEvent();
+					stop=false;
 					if(changeState1.arrivedEvent())
 					{
 						changeState1.waitEvent();
@@ -437,64 +445,114 @@ public class Controller  extends Thread
 						changeState3.waitEvent();
 						situation=Situation.state3;
 					}
+					while(!stop) {
+					switch(situation)
+					{
+					case state1:
+						if(red) {
+					evChengeGreen13.sendEvent();evChengeGreen12.sendEvent();evChengeGreen10.sendEvent();
+					evChengeGreen9.sendEvent();evChengeGreen6.sendEvent();evChengeGreen7.sendEvent();evChengeGreen0.sendEvent();
+					red = false;
+						}
 					if(changeRole.arrivedEvent())
 					{
 						changeRole.waitEvent();
 						out=false;
+						red=true;
+						stop=true;
+						evChangeRed13.sendEvent();evChangeRed12.sendEvent();evChangeRed10.sendEvent();
+						evChangeRed9.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();evChangeRed0.sendEvent();
+						evack1.sendEvent();evack2.sendEvent();evack3.sendEvent();evack4.sendEvent();
+						evack5.sendEvent();evack8.sendEvent();evack11.sendEvent();evack14.sendEvent();
+						evack15.sendEvent();
 						outState=OutState.regularDay;
 						state = State.green0;
 					}
-					switch(situation)
+					if(changeStates.arrivedEvent())
 					{
-					case state1:
-					evChengeGreen13.sendEvent();evChengeGreen12.sendEvent();evChengeGreen10.sendEvent();
-					evChengeGreen9.sendEvent();evChengeGreen6.sendEvent();evChengeGreen7.sendEvent();evChengeGreen0.sendEvent();
-					state = State.green0;
+						stop=true;
+						red=true;
+						state=State.green0;
+					}
 					break;
 					case state2:
+						if(red) {
 					evChengeGreen4.sendEvent();evChengeGreen5.sendEvent();evChengeGreen14.sendEvent();
 					evChengeGreen15.sendEvent();evChengeGreen11.sendEvent();evChengeGreen8.sendEvent();
 					evChengeGreen2.sendEvent();evChengeGreen3.sendEvent();
-					state = State.green2_3;
-					break;	
-					case state3:
-					evChengeGreen4.sendEvent();evChengeGreen5.sendEvent();
-					evChengeGreen2.sendEvent();
-					evChengeGreen12.sendEvent();evChengeGreen13.sendEvent();evChengeGreen6.sendEvent();
-					evChengeGreen7.sendEvent();evChengeGreen1.sendEvent();
-					state = State.green1_2;	
-					break;
-					}
-					sleep(5000);
-					changeStates.waitEvent();
-					if(changeState1.arrivedEvent())
-					{
-						changeState1.waitEvent();
-						situation=Situation.state1;
-					}
-					else if(changeState2.arrivedEvent())
-					{
-						changeState2.waitEvent();
-						situation=Situation.state2;
-					}
-					else if(changeState3.arrivedEvent())
-					{
-						changeState3.waitEvent();
-						situation=Situation.state3;
-					}
-					else if(changeRole.arrivedEvent())
+					red = false;
+						}
+					if(changeRole.arrivedEvent())
 					{
 						changeRole.waitEvent();
 						out=false;
+						red=true;
+						stop=true;
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed14.sendEvent();
+						evChangeRed15.sendEvent();evChangeRed11.sendEvent();evChangeRed8.sendEvent();
+						evack0.sendEvent();evack1.sendEvent();evack2.sendEvent();evack3.sendEvent();
+						evack6.sendEvent();evack7.sendEvent();evack9.sendEvent();evack10.sendEvent();
+						evack12.sendEvent();evack13.sendEvent();
+						evChangeRed2.sendEvent();evChangeRed3.sendEvent();
 						outState=OutState.regularDay;
 						state = State.green0;
 					}
-							
+					if(changeStates.arrivedEvent())
+					{
+						stop=true;
+						red=true;
+						state = State.green2_3;
+					}
+					break;	
+					case state3:
+						if(red) {
+					evChengeGreen4.sendEvent();evChengeGreen5.sendEvent();
+					evChengeGreen2.sendEvent();evChengeGreen12.sendEvent();evChengeGreen13.sendEvent();
+					evChengeGreen6.sendEvent();evChengeGreen7.sendEvent();evChengeGreen1.sendEvent();
+					red = false;
+						}
+					if(changeRole.arrivedEvent())
+					{
+						changeRole.waitEvent();
+						out=false;
+						red=true;
+						stop=true;
+						evChangeRed4.sendEvent();evChangeRed5.sendEvent();
+						evChangeRed2.sendEvent();evChangeRed12.sendEvent();evChangeRed13.sendEvent();
+						evChangeRed6.sendEvent();evChangeRed7.sendEvent();evChangeRed1.sendEvent();
+						evack0.sendEvent();evack3.sendEvent();evack8.sendEvent();evack9.sendEvent();
+						evack10.sendEvent();evack11.sendEvent();evack14.sendEvent();evack15.sendEvent();
+						outState=OutState.regularDay;
+						state = State.green0;
+					}
+					if(changeStates.arrivedEvent())
+					{
+						stop=true;
+						red=true;
+						state = State.green1_2;	
+					}
+					break;
+					default:
+						break;
+					}	
+					}
 			}
 		}
 			
 		} catch (InterruptedException e) {}
 
+	}
+	public void toState1() {
+		changeStates.sendEvent();
+		changeState1.sendEvent();
+	}
+	public void toState2() {
+		changeStates.sendEvent();
+		changeState2.sendEvent();
+	}
+	public void toState3() {
+		changeStates.sendEvent();
+		changeState3.sendEvent();
 	}
 
 }

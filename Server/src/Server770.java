@@ -32,7 +32,6 @@ class Server770 extends Thread 	   //the parallel server
             System.out.println(e.getMessage());
             System.exit(1);
         }
-
         System.out.println("Server starts on port " + DEFAULT_PORT);
         start();
     }

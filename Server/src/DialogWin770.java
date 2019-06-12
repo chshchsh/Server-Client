@@ -27,7 +27,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
 	String choose = "צומת 1";
 	int place = 0;
 
-    public DialogWin770(String header, Dialog770 myDialog)
+    public DialogWin770(Dialog770 myDialog)
     {
         super("Server of Ramzorim");
         setLayout(null);
