@@ -20,6 +20,8 @@ class Server770 extends Thread 	   //the parallel server
     int DEFAULT_PORT = 770;
     ServerSocket listenSocket;
     Socket clientSockets;
+    DialogWin770 myOutput = new DialogWin770();
+	int count = 0;
 
     public Server770()   // constructor of a TCP server
     {
@@ -43,7 +45,8 @@ class Server770 extends Thread 	   //the parallel server
             while (true)
             {
                 clientSockets = listenSocket.accept();
-                new Dialog770(clientSockets, this);
+                myOutput.myDialog[count] = new Dialog770(clientSockets, this);
+                count++;
             }
 
         } catch (IOException e)

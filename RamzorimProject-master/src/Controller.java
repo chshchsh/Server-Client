@@ -490,10 +490,10 @@ public class Controller  extends Thread
 						stop=true;
 						evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed14.sendEvent();
 						evChangeRed15.sendEvent();evChangeRed11.sendEvent();evChangeRed8.sendEvent();
-						evack0.sendEvent();evack1.sendEvent();evack2.sendEvent();evack3.sendEvent();
+						evChangeRed2.sendEvent();evChangeRed3.sendEvent();
+						evack0.sendEvent();evack1.sendEvent();
 						evack6.sendEvent();evack7.sendEvent();evack9.sendEvent();evack10.sendEvent();
 						evack12.sendEvent();evack13.sendEvent();
-						evChangeRed2.sendEvent();evChangeRed3.sendEvent();
 						outState=OutState.regularDay;
 						state = State.green0;
 					}

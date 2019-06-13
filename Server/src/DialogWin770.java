@@ -19,19 +19,17 @@ import javax.swing.JLabel;
 public class DialogWin770 extends JFrame implements ActionListener{
 	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover,removeCover,toShabat;
 	JLabel title,junction;
-	String[] junctionStrings = {"צומת 1","צומת 2","צומת3","צומת 4"};
-	JComboBox<String> list = new JComboBox<String>(junctionStrings);
+	JComboBox<String> list = new JComboBox<String>();
 	private static final long serialVersionUID = 1L;
-    public Dialog770 myDialog;
+    public Dialog770[] myDialog = new Dialog770[4];
     boolean[] takes = {false,false,false,false};
 	String choose = "צומת 1";
 	int place = 0;
 
-    public DialogWin770(Dialog770 myDialog)
+    public DialogWin770()
     {
         super("Server of Ramzorim");
         setLayout(null);
-        this.myDialog = myDialog;
         setSize(600,600);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -117,37 +115,38 @@ public class DialogWin770 extends JFrame implements ActionListener{
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 1")) {
 			if(takes[place])
-			myDialog.bufferSocketOut.println(junctionStrings[place] + " " + "העבר למצב 1");
+			myDialog[place].bufferSocketOut.println("העבר למצב 1");
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 2")) {
 			if(takes[place])
-				myDialog.bufferSocketOut.println(junctionStrings[place] + " " + "העבר למצב 2");
+				myDialog[place].bufferSocketOut.println("העבר למצב 2");
 
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 3")) {
 			if(takes[place])
-				myDialog.bufferSocketOut.println(junctionStrings[place] + " " + "העבר למצב 3");
+				myDialog[place].bufferSocketOut.println("העבר למצב 3");
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 1")) {
-			for(int i = 0;i < junctionStrings.length;i++) {
+			for(int i = 0;i < 4;i++) {
         		if(takes[i])
-    			myDialog.bufferSocketOut.println(junctionStrings[i] + " " + "העבר למצב 1");
+    			myDialog[i].bufferSocketOut.println("העבר למצב 1");
             	}
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 2")) {
-			for(int i = 0;i < junctionStrings.length;i++) {
+			for(int i = 0;i < 4;i++) {
         		if(takes[i])
-    			myDialog.bufferSocketOut.println(junctionStrings[i] + " " + "העבר למצב 2");
+    			myDialog[i].bufferSocketOut.println("העבר למצב 2");
             	}
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 3")) {
-        	for(int i = 0;i < junctionStrings.length;i++) {
+        	for(int i = 0;i < 4;i++) {
         		if(takes[i])
-    			myDialog.bufferSocketOut.println(junctionStrings[i] + " " + "העבר למצב 3");
+    			myDialog[i].bufferSocketOut.println("העבר למצב 3");
             	}
         }
 		else if (((JButton) e.getSource()).getText().equals("קח שליטה")) {
-			myDialog.bufferSocketOut.println(choose + "קח שליטה");
+			if(!takes[place])
+			myDialog[place].bufferSocketOut.println("קח שליטה");
 			switch (choose) {
 			case "צומת 1":
 				takes[0] =  true;
@@ -164,7 +163,8 @@ public class DialogWin770 extends JFrame implements ActionListener{
 			}
         }
 		else if (((JButton) e.getSource()).getText().equals("הורד שליטה")) {
-			myDialog.bufferSocketOut.println(choose + "הורד שליטה");
+			if(takes[place])
+			myDialog[place].bufferSocketOut.println("הורד שליטה");
 			switch (choose) {
 			case "צומת 1":
 				takes[0] =  false;
@@ -182,7 +182,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
         }
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב שבת")) {
         		if(takes[place])
-    			myDialog.bufferSocketOut.println(choose + " " + "העבר למצב שבת");
+    			myDialog[place].bufferSocketOut.println("העבר למצב שבת");
         }
 		}
 		

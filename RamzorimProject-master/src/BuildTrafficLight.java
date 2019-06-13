@@ -111,56 +111,22 @@ public class BuildTrafficLight
 	            {
 	                line = bufferSocketIn.readLine(); // reads a line from the server
 	                switch(line) {
-	                case "צומת 1 העבר למצב 1":
+	                case "העבר למצב 1":
 	                	controller.toState1();
 	                	break;
-	                case "צומת 1 העבר למצב 2":
+	                case "העבר למצב 2":
 	                	controller.toState2();
 	                	break;
-	                case "צומת 1 העבר למצב 3":
+	                case "העבר למצב 3":
 	                	controller.toState3();
 	                	break;
-	                case "צומת 2 העבר למצב 1":
-	                	controller.toState1();
-	                	break;
-	                case "צומת 2 העבר למצב 2":
-	                	controller.toState2();
-	                	break;
-	                case "צומת 2 העבר למצב 3":
-	                	controller.toState3();
-	                	break;
-	                case "צומת 3 העבר למצב 1":
-	                	controller.toState1();
-	                	break;
-	                case "צומת 3 העבר למצב 2":
-	                	controller.toState2();
-	                	break;
-	                case "צומת 3 העבר למצב 3":
-	                	controller.toState3();
-	                	break;
-	                case "צומת 1קח שליטה":
+	                case "קח שליטה":
 	                	controller.ChangeToRole();
 	                	break;
-	                case "צומת 2קח שליטה":
+	                case "הורד שליטה":
 	                	controller.ChangeToRole();
 	                	break;
-	                case "צומת 3קח שליטה":
-	                	controller.ChangeToRole();
-	                	break;
-	                case "צומת 1הורד שליטה":
-	                	controller.ChangeToRole();
-	                	break;
-	                case "צומת 2הורד שליטה":
-	                	controller.ChangeToRole();
-	                	break;
-	                case "צומת 3הורד שליטה":
-	                	controller.ChangeToRole();
-	                	break;
-	                case "העבר למצב שבת צומת 1":
-	                	break;
-	                case "העבר למצב שבת צומת 2":
-	                	break;
-	                case "העבר למצב שבת צומת 3":
+	                case "העבר למצב שבת":
 	                	break;
 	                }
 	            }

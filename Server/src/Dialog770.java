@@ -18,7 +18,6 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
     Server770 myServer;
     BufferedReader bufferSocketIn;
     PrintWriter bufferSocketOut;
-    DialogWin770 myOutput;
     
     
     public Dialog770(Socket clientSocket, Server770 myServer) throws IOException
@@ -46,7 +45,6 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
             System.err.println("server:Exception when opening sockets: " + e);
             return;
         }
-        myOutput = new DialogWin770(this);
         start();
     }
 
@@ -60,7 +58,7 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
             while (true)
             {
                 line = bufferSocketIn.readLine();
-                myOutput.list.addItem(line);
+                myServer.myOutput.list.addItem(line);
             }
         } catch (IOException e)
         {
