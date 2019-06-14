@@ -85,7 +85,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -105,7 +105,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -139,12 +139,6 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
-							if(changeRole.arrivedEvent())
-							{
-								changeRole.waitEvent();
-								out=true;
-								outState=OutState.Role;
-							}
 							//tm(7000)
 							sleep(7000);
 							state = State.condition1;	
@@ -159,9 +153,17 @@ public class Controller  extends Thread
 							}
 							//[else]/evChengeRed(3,11,8,14,15)
 							else {
+								if(changeRole.arrivedEvent())
+								{
+									changeRole.waitEvent();
+									out=true;
+									outState=OutState.Role;
+								}
+								else {
 							evChangeRed3.sendEvent();evChangeRed11.sendEvent();evChangeRed8.sendEvent();
 							evChangeRed14.sendEvent();evChangeRed15.sendEvent();
 							state=State.turn_3_red;
+								}
 							}
 							break;
 						case turn_3_red:
@@ -175,7 +177,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -198,12 +200,6 @@ public class Controller  extends Thread
 								outState=OutState.Shabat;
 								break;
 							}
-							if(changeRole.arrivedEvent())
-							{
-								changeRole.waitEvent();
-								out=true;
-								outState=OutState.Role;
-							}
 							//tm(7000)
 							sleep(7000);
 							state = State.condition2;
@@ -220,9 +216,17 @@ public class Controller  extends Thread
 							}
 							//[else]/evChengeRed(4,5,1,2)
 							else {
+								if(changeRole.arrivedEvent())
+								{
+									changeRole.waitEvent();
+									out=true;
+									outState=OutState.Role;
+								}
+								else {
 							evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed1.sendEvent();
 							evChangeRed2.sendEvent();
 							state=State.turn1_2red;
+								}
 							}
 							break;
 						case turn1_2red:
@@ -236,7 +240,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -256,7 +260,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -277,7 +281,7 @@ public class Controller  extends Thread
 								out=true;
 								outState=OutState.Shabat;
 							}
-							if(changeRole.arrivedEvent())
+							else if(changeRole.arrivedEvent())
 							{
 								changeRole.waitEvent();
 								out=true;
@@ -387,7 +391,7 @@ public class Controller  extends Thread
 						evack6.waitEvent();evack7.waitEvent();
 						evack9.waitEvent();evack10.waitEvent();evack12.waitEvent();
 						break;
-					case green2_3:
+					case condition1:
 						evChangeRed2.sendEvent();evChangeRed3.sendEvent();
 						evChangeRed4.sendEvent();evChangeRed5.sendEvent();
 						evChangeRed8.sendEvent();evChangeRed11.sendEvent();
@@ -403,7 +407,7 @@ public class Controller  extends Thread
 						evack2.waitEvent();
 						evack4.waitEvent();evack5.waitEvent();
 						break;
-					case green1_2:
+					case condition2:
 						evChangeRed1.sendEvent();evChangeRed2.sendEvent();
 						evChangeRed4.sendEvent();evChangeRed5.sendEvent();evChangeRed6.sendEvent();evChangeRed7.sendEvent();
 						evChangeRed12.sendEvent();evChangeRed13.sendEvent();
