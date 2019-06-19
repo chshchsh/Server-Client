@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -6,26 +13,38 @@ import javax.swing.JPanel;
 public class CarMooving extends Thread
 {
 	JLabel myLabel;
+    JLabel myNumLabel;
 	JPanel myPanel;
 	private ShloshaAvot myRamzor;
 	private int key;
+	private String numberTraffic;
 	int x, dx;
 	int y, dy;
 	ImageIcon imageIcon;
 	boolean first2=true;
-	public CarMooving(JPanel myPanel, ShloshaAvot myRamzor,int key) 
+    private  int num;
+    Socket clientSocket = null;
+    PrintWriter bufferSocketOut;
+    String SERVERHOST = "127.0.0.1";
+    int DEFAULT_PORT = 770;
+	public CarMooving(JPanel myPanel, ShloshaAvot myRamzor,int key,int num, String numberTraffic)
 	{
 		this.myPanel=myPanel;
 		this.myRamzor=myRamzor;
 		this.key=key;
+        this.num=num;
+        this.numberTraffic=numberTraffic;
 		setCarLocationAndMooving();
 		imageIcon = getImageIcon();
 		myLabel= new JLabel(imageIcon);
 		myLabel.setOpaque(false);
 		myPanel.add(myLabel);
+        myNumLabel=new JLabel(Integer.toString(num));
+        myPanel.add(myNumLabel);
 		setDaemon(true);
 		start();
 	}
+
 	private void setCarLocationAndMooving() 
 	{
 		switch (key) 
@@ -61,7 +80,18 @@ public class CarMooving extends Thread
 	public void run()
 	{
 		myLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
-
+        myNumLabel.setBounds(x+15, y-20, 30,20);
+        try {
+            clientSocket = new Socket(SERVERHOST, DEFAULT_PORT);
+        	
+			bufferSocketOut = new PrintWriter(
+			        new BufferedWriter(
+			        new OutputStreamWriter(
+			        clientSocket.getOutputStream())), true);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		while (!finish())
 		{
 			if (myRamzor.isStop() && toStop())
@@ -71,6 +101,7 @@ public class CarMooving extends Thread
 				x +=dx;
 				y +=dy;
 				myLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+                myNumLabel.setBounds(x+15, y-20, 30,20);
 			}
 			try {
 				Thread.sleep(200);
@@ -79,7 +110,7 @@ public class CarMooving extends Thread
 			}
 			myPanel.repaint();
 		}
-		//where_the_car_go();
+		goin_out();
 
 	}
 	private boolean finish() 
@@ -99,6 +130,7 @@ public class CarMooving extends Thread
 				myLabel.removeAll();
 				myLabel.setIcon(imageIcon);
 				myLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+                myNumLabel.setBounds(x+15, y-20, 30,20);
 				return false;
 			}
 		case 3:
@@ -149,25 +181,26 @@ public class CarMooving extends Thread
 		}
 		return null;
 	}
-	
-	private void where_the_car_go() {
+	private void goin_out () {
 		switch (key) 
 		{
 		case 1:
-			//לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לשמאל 
-			
+			bufferSocketOut.println("left "+numberTraffic+" "+num);
+			break;
 		case 2:
-			// לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לשמאל רק מכונית מלמטה 
-
+			break;
 		case 3:
-			//לא צריך לעשות שום דבר 
+			break;
 		case 4:
-			// לעשות פונקציה שמעבירה לממשק שהסתיים מישהו שהולך לימין
-			
+			bufferSocketOut.println("right "+numberTraffic+" "+num);
+			break;
+		case 5:
+			//bufferSocketOut.println("left "+numberTraffic+" "+num);
+			break;
 		default:
 			break;
 		}
-		
 	}
+
 
 }

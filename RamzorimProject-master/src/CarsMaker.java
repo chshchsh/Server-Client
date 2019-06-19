@@ -13,24 +13,34 @@ public class CarsMaker extends Thread
 	JPanel myPanel;
 	private ShloshaAvot myRamzor;
 	int key;
-	public CarsMaker(JPanel myPanel,ShloshaAvot myRamzor, int key) 
+	int num;
+	String numberTraffic;
+	public CarsMaker(JPanel myPanel,ShloshaAvot myRamzor, int key,String numberTraffic) 
 	{
 		this.myPanel=myPanel;
 		this.myRamzor=myRamzor;
 		this.key=key;
+		this.numberTraffic=numberTraffic;
 		setDaemon(true);
 		start();
 	}
 
 	public void run()
 	{
+		num=1;
 		try {
 			while (true)
 			{
-				sleep(300);
+				sleep(600);
 				if ( !myRamzor.isStop())
 				{
-					new CarMooving(myPanel,myRamzor,key);
+					new CarMooving(myPanel,myRamzor,key,num,numberTraffic);
+					if(num==5)
+					{
+						num=1;
+					}
+					else
+						num++;
 				}
 
 			}

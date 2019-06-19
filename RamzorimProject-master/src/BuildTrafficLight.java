@@ -2,6 +2,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import java.io.*;
 import java.net.*;
+import java.util.Random;
+
 
 /*
  * Created on Mimuna 5767  upDate on Addar 5772 
@@ -12,6 +14,7 @@ import java.net.*;
  */
 public class BuildTrafficLight
 {
+	Random rand = new Random();
 	public void doit() {
 		String SERVERHOST = "127.0.0.1";
 	    int DEFAULT_PORT = 770;
@@ -21,6 +24,7 @@ public class BuildTrafficLight
 	    String line;
 	    
 	    String number = JOptionPane.showInputDialog("שם הצומת");
+	    
 	    String name = "צומת " + number;
 	    
 		final int numOfLights=4+12+1;
@@ -51,7 +55,7 @@ public class BuildTrafficLight
 		TrafficLightFrame tlf=new TrafficLightFrame(name,ramzorim);
 
 		for (int i = 0; i<4 ; i++) {
-			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i+1);
+			listThree[i] = new ShloshaAvot(ramzorim[i],tlf.myPanel,i+1, number);
 		}
 
 		for (int i = 0; i<12 ; i++) {
@@ -110,6 +114,7 @@ public class BuildTrafficLight
 	            while (true)
 	            {
 	                line = bufferSocketIn.readLine(); // reads a line from the server
+                	int rando = rand.nextInt(2);
 	                switch(line) {
 	                case "העבר למצב 1":
 	                	controller.toState1();
@@ -127,6 +132,51 @@ public class BuildTrafficLight
 	                	controller.ChangeToRole();
 	                	break;
 	                case "העבר למצב שבת":
+	                	break;
+	                case "מכונית לשמאל 1":
+	                	new CarMooving(tlf.myPanel,listThree[0],1,1,number);
+	                	break;
+	                case "מכונית לשמאל2":
+	                	new CarMooving(tlf.myPanel,listThree[0],1,2,number);
+	                	break;
+	                case "מכונית לשמאל 3":
+	                	new CarMooving(tlf.myPanel,listThree[0],1,3,number);
+	                	break;
+	                case "מכונית לשמאל 4":
+	                	new CarMooving(tlf.myPanel,listThree[0],1,4,number);
+	                	break;
+	                case "מכונית לשמאל 5":
+	                	new CarMooving(tlf.myPanel,listThree[0],1,5,number);
+	                	break;
+	                case "מכונית לימין 1":
+	                	if(rando ==0)
+	                		new CarMooving(tlf.myPanel,listThree[3],3,1,number);
+	                	else
+	                		new CarMooving(tlf.myPanel,listThree[4],4,1,number);
+	                	break;
+	                case "מכונית לימין  2":
+	                	if(rando ==0)
+	                		new CarMooving(tlf.myPanel,listThree[3],3,2,number);
+	                	else
+	                		new CarMooving(tlf.myPanel,listThree[4],4,2,number);
+	                	break;
+	                case "מכונית לימין  3":
+	                	if(rando ==0)
+	                		new CarMooving(tlf.myPanel,listThree[3],3,3,number);
+	                	else
+	                		new CarMooving(tlf.myPanel,listThree[4],4,3,number);
+	                	break;
+	                case "מכונית לימין  4":
+	                	if(rando ==0)
+	                		new CarMooving(tlf.myPanel,listThree[3],3,4,number);
+	                	else
+	                		new CarMooving(tlf.myPanel,listThree[4],4,4,number);
+	                	break;
+	                case "מכונית לימין 5":
+	                	if(rando ==0)
+	                		new CarMooving(tlf.myPanel,listThree[3],3,5,number);
+	                	else
+	                		new CarMooving(tlf.myPanel,listThree[4],4,5,number);
 	                	break;
 	                }
 	            }

@@ -10,16 +10,25 @@ public class ShloshaAvot extends Thread
 	enum OutState {regularDay,Shabat};
 	Ramzor ramzor;
 	JPanel panel;
+	String number;
 	State state;
 	OutState outState;
 	Event64 evack,evChengeGreen,evChengeRed,evShabat,stopEvShabat;
 	
 	private boolean stop=true;
-	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key)
+	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key,String number)
 	{
 		this.ramzor=ramzor;
 		this.panel=panel;
-		new CarsMaker(panel,this,key);
+		this.number= number;
+		if(number.equals("1")&&key==1)
+		new CarsMaker(panel,this,key,number);
+		if(key==2)
+			new CarsMaker(panel,this,key,number);
+		if(number.equals("4")&&key==3)
+			new CarsMaker(panel,this,key,number);
+		if(number.equals("4")&&key==4)
+			new CarsMaker(panel,this,key,number);
 	}
 	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed,Event64 evShabat,Event64 stopEvShabat) {
 		this.evack = evack;

@@ -186,5 +186,10 @@ public class DialogWin770 extends JFrame implements ActionListener{
         }
 		}
 		
+	public void send_car_moving(int place,String line)
+	{
+		myDialog[place].bufferSocketOut.println(line);
+
+	}
 	}
 

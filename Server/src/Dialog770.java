@@ -58,7 +58,120 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
             while (true)
             {
                 line = bufferSocketIn.readLine();
-                myServer.myOutput.list.addItem(line);
+                switch(line)
+                {
+                case "left 1 1":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל 1");
+                	break;
+                case "left 1 2":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל 2");
+                	break;
+                case "left 1 3":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל 3");
+                	break;
+                case "left 1 4":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל 4");
+                	break;
+                case "left 1 5":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל 5");
+                	break;
+                case "left 2 1":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל 1");
+                	break;
+                case "left 2 2":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל 2");
+                	break;
+                case "left 2 3":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל 3");
+                	break;
+                case "left 2 4":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל 4");
+                	break;
+                case "left 2 5":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל 5");
+                	break;
+                case "left 3 1":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל 1");
+                	break;
+                case "left 3 2":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל 2");
+                	break;
+                case "left 3 3":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל 3");
+                	break;
+                case "left 3 4":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל 4");
+                	break;
+                case "left 3 5":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל 5");
+                case "left 4 1":
+                	break;
+                case "left 4 2":
+                	break;
+                case "left 4 3":
+                	break;
+                case "left 4 4":
+                	break;
+                case "left 4 5":
+                	break;
+                case "right 4 1":
+                	myServer.myOutput.send_car_moving(3,"מכונית לימין 1");
+                	break;
+                case "right 4 2":
+                	myServer.myOutput.send_car_moving(3,"מכונית לימין 2");
+                	break;
+                case "right 4 3":
+                	myServer.myOutput.send_car_moving(3,"מכונית לימין 3");
+                	break;
+                case "right 4 4":
+                	myServer.myOutput.send_car_moving(3,"מכונית לימין 4");
+                	break;
+                case "right 4 5":
+                	myServer.myOutput.send_car_moving(3,"מכונית לימין 5");
+                	break;
+                case "right 2 1":
+                	myServer.myOutput.send_car_moving(1,"מכונית לימין 1");
+                	break;
+                case "right 2 2":
+                	myServer.myOutput.send_car_moving(1,"מכונית לימין 2");
+                	break;
+                case "right 2 3":
+                	myServer.myOutput.send_car_moving(1,"מכונית לימין 3");
+                	break;
+                case "right 2 4":
+                	myServer.myOutput.send_car_moving(1,"מכונית לימין 4");
+                	break;
+                case "right 2 5":
+                	myServer.myOutput.send_car_moving(1,"מכונית לימין 5");
+                	break;
+                case "right 3 1":
+                	myServer.myOutput.send_car_moving(2,"מכונית לימין 1");
+                	break;
+                case "right 3 2":
+                	myServer.myOutput.send_car_moving(2,"מכונית לימין 2");
+                	break;
+                case "right 3 3":
+                	myServer.myOutput.send_car_moving(2,"מכונית לימין 3");
+                	break;
+                case "right 3 4":
+                	myServer.myOutput.send_car_moving(2,"מכונית לימין 4");
+                	break;
+                case "right 3 5":
+                	myServer.myOutput.send_car_moving(2,"מכונית לימין 5");
+                case "right 1 1":
+                	break;
+                case "right 1 2":
+                	break;
+                case "right 1 3":
+                	break;
+                case "right 1 4":
+                	break;
+                case "right 1 5":
+                	break;
+                	
+                 default:
+                	 myServer.myOutput.list.addItem(line);
+                }
             }
         } catch (IOException e)
         {
