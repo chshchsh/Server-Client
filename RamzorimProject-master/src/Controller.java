@@ -431,7 +431,19 @@ public class Controller  extends Thread
 						evack13.waitEvent();evack12.waitEvent();evack7.waitEvent();
 						evack6.waitEvent();evack1.waitEvent();
 						break;
-					} 
+					case green2_3:
+						evChangeRed3.sendEvent();evChangeRed8.sendEvent();evChangeRed2.sendEvent();
+						evChangeRed15.sendEvent();evChangeRed14.sendEvent();evChangeRed11.sendEvent();
+						evack3.waitEvent();evack8.waitEvent();evack2.waitEvent();
+						evack15.waitEvent();evack14.waitEvent();evack11.waitEvent();
+						break;
+					case green1_2:
+						evChangeRed1.sendEvent();evChangeRed4.sendEvent();
+						evChangeRed5.sendEvent();evChangeRed2.sendEvent();
+						evack1.waitEvent();evack4.waitEvent();
+						evack5.waitEvent();evack2.waitEvent();
+						break; 
+					}
 					changeStates.waitEvent();
 					stop=false;
 					if(changeState1.arrivedEvent())
