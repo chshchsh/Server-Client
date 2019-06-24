@@ -31,13 +31,13 @@ public class CarsMaker extends Thread
 		try {
 			while (true)
 			{
-				sleep(600);
-				if ( !myRamzor.isStop())
+				sleep(1500);
+				if (!myRamzor.isStop())
 				{
 					new CarMooving(myPanel,myRamzor,key,num,numberTraffic);
-					if(num==5)
+					if(num == 1)
 					{
-						num=1;
+						num = 1;
 					}
 					else
 						num++;

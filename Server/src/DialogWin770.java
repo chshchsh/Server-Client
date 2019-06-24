@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 public class DialogWin770 extends JFrame implements ActionListener{
 	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover,removeCover,toShabat;
 	JLabel title,junction;
+	JComboBox<String> cb;
 	JComboBox<String> list = new JComboBox<String>();
 	private static final long serialVersionUID = 1L;
     public Dialog770[] myDialog = new Dialog770[4];
@@ -96,7 +97,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == list) {
-			JComboBox<String> cb = (JComboBox<String>)e.getSource();
+			cb = (JComboBox<String>)e.getSource();
 			 choose = (String)cb.getSelectedItem();
 			 switch (choose) {
 				case "צומת 1":
@@ -188,8 +189,8 @@ public class DialogWin770 extends JFrame implements ActionListener{
 		
 	public void send_car_moving(int place,String line)
 	{
+		if(cb.getItemCount() >= place)
 		myDialog[place].bufferSocketOut.println(line);
-
 	}
 	}
 

@@ -136,7 +136,7 @@ public class BuildTrafficLight
 	                case "מכונית לשמאל 1":
 	                	new CarMooving(tlf.myPanel,listThree[0],1,1,number);
 	                	break;
-	                case "מכונית לשמאל2":
+	                case "מכונית לשמאל 2":
 	                	new CarMooving(tlf.myPanel,listThree[0],1,2,number);
 	                	break;
 	                case "מכונית לשמאל 3":
@@ -149,7 +149,7 @@ public class BuildTrafficLight
 	                	new CarMooving(tlf.myPanel,listThree[0],1,5,number);
 	                	break;
 	                case "מכונית לימין 1":
-	                	if(rando ==0)
+	                	if(rando == 0)
 	                		new CarMooving(tlf.myPanel,listThree[3],3,1,number);
 	                	else
 	                		new CarMooving(tlf.myPanel,listThree[4],4,1,number);

@@ -111,7 +111,6 @@ public class CarMooving extends Thread
 			myPanel.repaint();
 		}
 		goin_out();
-
 	}
 	private boolean finish() 
 	{
