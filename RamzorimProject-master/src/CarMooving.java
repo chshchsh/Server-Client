@@ -27,13 +27,15 @@ public class CarMooving extends Thread
     PrintWriter bufferSocketOut;
     String SERVERHOST = "127.0.0.1";
     int DEFAULT_PORT = 770;
-	public CarMooving(JPanel myPanel, ShloshaAvot myRamzor,int key,int num, String numberTraffic)
+	public CarMooving(JPanel myPanel, ShloshaAvot myRamzor,int key,int num, String numberTraffic,Socket clientSocket, PrintWriter bufferSocketOut)
 	{
 		this.myPanel=myPanel;
 		this.myRamzor=myRamzor;
 		this.key=key;
         this.num=num;
         this.numberTraffic=numberTraffic;
+        this.clientSocket=clientSocket;
+        this.bufferSocketOut=bufferSocketOut;
 		setCarLocationAndMooving();
 		imageIcon = getImageIcon();
 		myLabel= new JLabel(imageIcon);
@@ -70,6 +72,10 @@ public class CarMooving extends Thread
 			dx=-50;
 			dy=0;
 			break;
+		case 6:	
+			x=850;  dx=-100;
+			y=170;  dy=0;
+			break;
 
 		default:
 			x=900;  dx=-50;
@@ -81,17 +87,7 @@ public class CarMooving extends Thread
 	{
 		myLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
         myNumLabel.setBounds(x+15, y-20, 30,20);
-        try {
-            clientSocket = new Socket(SERVERHOST, DEFAULT_PORT);
-        	
-			bufferSocketOut = new PrintWriter(
-			        new BufferedWriter(
-			        new OutputStreamWriter(
-			        clientSocket.getOutputStream())), true);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+     
 		while (!finish())
 		{
 			if (myRamzor.isStop() && toStop())
@@ -110,7 +106,24 @@ public class CarMooving extends Thread
 			}
 			myPanel.repaint();
 		}
-		goin_out();
+		switch (key) 
+		{
+		case 1:
+			bufferSocketOut.println("left "+numberTraffic+" "+num);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			bufferSocketOut.println("right "+numberTraffic+" "+num);
+			break;
+		case 5:
+			bufferSocketOut.println("left1 "+numberTraffic+" "+num);
+			break;
+		default:
+			break;
+		}
 	}
 	private boolean finish() 
 	{
@@ -143,6 +156,8 @@ public class CarMooving extends Thread
 			return x>800;
 		case 5:
 			return x<-20;
+		case 6:
+			return x<-20;
 		}
 		return false;
 	}
@@ -158,6 +173,9 @@ public class CarMooving extends Thread
 			return x<100;
 		case 4:
 			return x<=150;
+		case 6:
+			return x>550;
+
 		}
 		return false;
 	}
@@ -175,31 +193,14 @@ public class CarMooving extends Thread
 			return  new ImageIcon("Images/right.gif");
 		case 5:
 			return  new ImageIcon("Images/upLeft.gif");
+		case 6:
+			return  new ImageIcon("Images/upLeft.gif");
 		default:
 			break;
 		}
 		return null;
 	}
-	private void goin_out () {
-		switch (key) 
-		{
-		case 1:
-			bufferSocketOut.println("left "+numberTraffic+" "+num);
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			bufferSocketOut.println("right "+numberTraffic+" "+num);
-			break;
-		case 5:
-			//bufferSocketOut.println("left "+numberTraffic+" "+num);
-			break;
-		default:
-			break;
-		}
-	}
-
-
+	
 }
+
+

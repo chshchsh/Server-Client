@@ -1,4 +1,8 @@
 import java.awt.Color;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 
@@ -14,21 +18,47 @@ public class ShloshaAvot extends Thread
 	State state;
 	OutState outState;
 	Event64 evack,evChengeGreen,evChengeRed,evShabat,stopEvShabat;
-	
 	private boolean stop=true;
-	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key,String number)
+	public ShloshaAvot( Ramzor ramzor,JPanel panel,int key,String number,List<Integer> listQ,Socket clientSocket, PrintWriter bufferSocketOut,List<Integer> listQ1)
 	{
 		this.ramzor=ramzor;
 		this.panel=panel;
 		this.number= number;
 		if(number.equals("1")&&key==1)
-		new CarsMaker(panel,this,key,number);
+		new CarsMaker(panel,this,key,number,clientSocket,bufferSocketOut);
+		if(number.equals("2")&&key==1)
+		{
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+			new carMakerQ(panel,this,6,number,listQ1,clientSocket,bufferSocketOut);
+		}
+		if(number.equals("3")&&key==1)
+		{
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+			new carMakerQ(panel,this,6,number,listQ1,clientSocket,bufferSocketOut);
+		}
+		if(number.equals("4")&&key==1)
+		{
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+			new carMakerQ(panel,this,6,number,listQ1,clientSocket,bufferSocketOut);
+		}
 		if(key==2)
-			new CarsMaker(panel,this,key,number);
+			new CarsMaker(panel,this,key,number,clientSocket,bufferSocketOut);
 		if(number.equals("4")&&key==3)
-			new CarsMaker(panel,this,key,number);
+			new CarsMaker(panel,this,key,number,clientSocket,bufferSocketOut);
+		if(number.equals("3")&&key==3)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+		if(number.equals("3")&&key==4)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+		if(number.equals("2")&&key==3)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+		if(number.equals("2")&&key==4)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+		if(number.equals("1")&&key==3)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
+		if(number.equals("1")&&key==4)
+			new carMakerQ(panel,this,key,number,listQ,clientSocket,bufferSocketOut);
 		if(number.equals("4")&&key==4)
-			new CarsMaker(panel,this,key,number);
+			new CarsMaker(panel,this,key,number,clientSocket,bufferSocketOut);
 	}
 	public void init(Event64 evack,Event64 evChengeGreen,Event64 evChengeRed,Event64 evShabat,Event64 stopEvShabat) {
 		this.evack = evack;

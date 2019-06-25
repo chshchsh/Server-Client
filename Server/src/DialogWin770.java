@@ -189,8 +189,13 @@ public class DialogWin770 extends JFrame implements ActionListener{
 		
 	public void send_car_moving(int place,String line)
 	{
+		
 		if(cb.getItemCount() >= place)
+		{
+			--place;
+		
 		myDialog[place].bufferSocketOut.println(line);
+		}
 	}
 	}
 

@@ -1,3 +1,6 @@
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import javax.swing.JPanel;
 
 /*
@@ -15,12 +18,16 @@ public class CarsMaker extends Thread
 	int key;
 	int num;
 	String numberTraffic;
-	public CarsMaker(JPanel myPanel,ShloshaAvot myRamzor, int key,String numberTraffic) 
+	Socket clientSocket;
+	PrintWriter bufferSocketOut;
+	public CarsMaker(JPanel myPanel,ShloshaAvot myRamzor, int key,String numberTraffic,Socket clientSocket, PrintWriter bufferSocketOut) 
 	{
 		this.myPanel=myPanel;
 		this.myRamzor=myRamzor;
 		this.key=key;
 		this.numberTraffic=numberTraffic;
+		this.clientSocket=clientSocket;
+        this.bufferSocketOut=bufferSocketOut;
 		setDaemon(true);
 		start();
 	}
@@ -34,8 +41,8 @@ public class CarsMaker extends Thread
 				sleep(1500);
 				if (!myRamzor.isStop())
 				{
-					new CarMooving(myPanel,myRamzor,key,num,numberTraffic);
-					if(num == 1)
+					new CarMooving(myPanel,myRamzor,key,num,numberTraffic,clientSocket,bufferSocketOut);
+					if(num == 5)
 					{
 						num = 1;
 					}

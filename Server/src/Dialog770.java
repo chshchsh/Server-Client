@@ -114,6 +114,60 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
                 	break;
                 case "left 4 5":
                 	break;
+                case "left1 1 1":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל1 1");
+                	break;
+                case "left1 1 2":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל1 2");
+                	break;
+                case "left1 1 3":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל1 3");
+                	break;
+                case "left1 1 4":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל1 4");
+                	break;
+                case "left1 1 5":
+                	myServer.myOutput.send_car_moving(2,"מכונית לשמאל1 5");
+                	break;
+                case "left1 2 1":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל1 1");
+                	break;
+                case "left1 2 2":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל1 2");
+                	break;
+                case "left1 2 3":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל1 3");
+                	break;
+                case "left1 2 4":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל1 4");
+                	break;
+                case "left1 2 5":
+                	myServer.myOutput.send_car_moving(3,"מכונית לשמאל1 5");
+                	break;
+                case "left1 3 1":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל1 1");
+                	break;
+                case "left1 3 2":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל1 2");
+                	break;
+                case "left1 3 3":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל1 3");
+                	break;
+                case "left1 3 4":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל1 4");
+                	break;
+                case "left1 3 5":
+                	myServer.myOutput.send_car_moving(4,"מכונית לשמאל1 5");
+                case "left1 4 1":
+                	break;
+                case "left1 4 2":
+                	break;
+                case "left1 4 3":
+                	break;
+                case "left1 4 4":
+                	break;
+                case "left1 4 5":
+                	break;
                 case "right 4 1":
                 	myServer.myOutput.send_car_moving(3,"מכונית לימין 1");
                 	break;
@@ -171,6 +225,7 @@ public class Dialog770 extends Thread // parallel dialogs on the same socket
                 	
                  default:
                 	 myServer.myOutput.list.addItem(line);
+                	 break;
                 }
             }
         } catch (IOException e)
