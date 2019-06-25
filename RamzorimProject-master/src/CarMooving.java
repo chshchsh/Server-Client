@@ -121,6 +121,9 @@ public class CarMooving extends Thread
 		case 5:
 			bufferSocketOut.println("left1 "+numberTraffic+" "+num);
 			break;
+		case 6:
+			bufferSocketOut.println("left1 "+numberTraffic+" "+num);
+			break;
 		default:
 			break;
 		}
