@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 
 
 public class DialogWin770 extends JFrame implements ActionListener{
-	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover,removeCover,toShabat;
+	JButton toState1,toState2,toState3,alltoState1,alltoState2,alltoState3,takeCover,removeCover,toShabat,fromShabat;
 	JLabel title,junction;
 	JComboBox<String> cb;
 	JComboBox<String> list = new JComboBox<String>();
@@ -90,6 +90,11 @@ public class DialogWin770 extends JFrame implements ActionListener{
         toShabat.setFont(new Font("Segoe UI",Font.BOLD,12));
         add(toShabat);
         toShabat.addActionListener(this);
+        fromShabat = new JButton("השבת מצב שבת");
+        fromShabat.setBounds(220, 252, 130, 35);
+        fromShabat.setFont(new Font("Segoe UI",Font.BOLD,12));
+        add(fromShabat);
+        fromShabat.addActionListener(this);
        setVisible(true);
     }
 
@@ -129,21 +134,42 @@ public class DialogWin770 extends JFrame implements ActionListener{
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 1")) {
 			for(int i = 0;i < 4;i++) {
-        		if(takes[i])
+        		if(takes[i]) {
+        			try {
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 1");
+        		}
             	}
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 2")) {
 			for(int i = 0;i < 4;i++) {
-        		if(takes[i])
+        		if(takes[i]) {
+        			try {
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 2");
             	}
+			}
         }
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 3")) {
         	for(int i = 0;i < 4;i++) {
-        		if(takes[i])
+        		if(takes[i]) {
+        			try {
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 3");
             	}
+        	}
         }
 		else if (((JButton) e.getSource()).getText().equals("קח שליטה")) {
 			if(!takes[place])
@@ -185,11 +211,16 @@ public class DialogWin770 extends JFrame implements ActionListener{
         		if(takes[place])
     			myDialog[place].bufferSocketOut.println("העבר למצב שבת");
         }
+		else if (((JButton) e.getSource()).getText().equals("השבת מצב שבת")) {
+    		if(takes[place]) {
+			myDialog[place].bufferSocketOut.println("השבת מצב שבת");
+    		takes[place] = false;
+    		}
+    }
 		}
 		
 	public void send_car_moving(int place,String line)
-	{
-		
+	{	
 		if(cb.getItemCount() >= place)
 		{
 			--place;

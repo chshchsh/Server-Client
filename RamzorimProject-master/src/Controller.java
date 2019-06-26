@@ -24,6 +24,7 @@ public class Controller  extends Thread
 	Event64 changeRole = new Event64(),changeStates = new Event64(),changeState1= new Event64(),changeState2 = new Event64(),changeState3 = new Event64();
 	boolean stop = false;
 	boolean red = true;
+	private boolean shabat = false;
 	
 	public Controller (ShloshaAvot listThree[] ,ShneyLuchot listTwo[],MyActionListener myListener) {
 		this.listThree = listThree;
@@ -444,22 +445,34 @@ public class Controller  extends Thread
 						evack5.waitEvent();evack2.waitEvent();
 						break; 
 					}
-					changeStates.waitEvent();
-					stop=false;
-					if(changeState1.arrivedEvent())
-					{
-						changeState1.waitEvent();
-						situation=Situation.state1;
-					}
-					else if(changeState2.arrivedEvent())
-					{
-						changeState2.waitEvent();
-						situation=Situation.state2;
-					}
-					else if(changeState3.arrivedEvent())
-					{
-						changeState3.waitEvent();
-						situation=Situation.state3;
+					while(stop) {
+						if(changeStates.arrivedEvent()) {
+					    changeStates.waitEvent();
+					    stop=false;
+					    if(changeState1.arrivedEvent())
+						{
+							changeState1.waitEvent();
+							situation=Situation.state1;
+						}
+						else if(changeState2.arrivedEvent())
+						{
+							changeState2.waitEvent();
+							situation=Situation.state2;
+						}
+						else if(changeState3.arrivedEvent())
+						{
+							changeState3.waitEvent();
+							situation=Situation.state3;
+						}
+						}
+						if(changeRole.arrivedEvent()) {
+							changeRole.waitEvent();
+							stop = false;
+						}
+						if(evButtonShabat.arrivedEvent()) {
+							evButtonShabat.waitEvent();
+							stop = false;
+						}
 					}
 					while(!stop) {
 					switch(situation)
@@ -483,6 +496,14 @@ public class Controller  extends Thread
 						evack15.sendEvent();
 						outState=OutState.regularDay;
 						state = State.green0;
+					}
+					if(evButtonShabat.arrivedEvent()) {
+						evButtonShabat.waitEvent();
+						out=false;
+						red=true;
+						stop=true;
+						state = State.green0;
+						outState=OutState.Shabat;
 					}
 					if(changeStates.arrivedEvent())
 					{
@@ -513,6 +534,14 @@ public class Controller  extends Thread
 						outState=OutState.regularDay;
 						state = State.green0;
 					}
+					if(evButtonShabat.arrivedEvent()) {
+						evButtonShabat.waitEvent();
+						out=false;
+						red=true;
+						stop=true;
+						state = State.green2_3;
+						outState=OutState.Shabat;
+					}
 					if(changeStates.arrivedEvent())
 					{
 						stop=true;
@@ -540,6 +569,14 @@ public class Controller  extends Thread
 						evack10.sendEvent();evack11.sendEvent();evack14.sendEvent();evack15.sendEvent();
 						outState=OutState.regularDay;
 						state = State.green0;
+					}
+					if(evButtonShabat.arrivedEvent()) {
+						evButtonShabat.waitEvent();
+						out=false;
+						red=true;
+						stop=true;
+						state = State.green1_2;
+						outState=OutState.Shabat;
 					}
 					if(changeStates.arrivedEvent())
 					{
@@ -569,6 +606,16 @@ public class Controller  extends Thread
 	public void toState3() {
 		changeStates.sendEvent();
 		changeState3.sendEvent();
+	}
+	public void ChangeToShabat() {
+		if(!shabat) {
+		evButtonShabat.sendEvent();
+		shabat = true;
+		}
+		else {
+		stopButtonEvShabat.sendEvent();
+		shabat = false;
+		}
 	}
 
 }

@@ -155,6 +155,10 @@ public class BuildTrafficLight
 	                	controller.ChangeToRole();
 	                	break;
 	                case "העבר למצב שבת":
+	                	controller.ChangeToShabat();
+	                	break;
+	                case "השבת מצב שבת":
+	                	controller.ChangeToShabat();
 	                	break;
 	                case "מכונית לשמאל 1":
 	                	listQ1.add(1);
