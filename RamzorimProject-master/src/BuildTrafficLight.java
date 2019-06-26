@@ -18,7 +18,7 @@ public class BuildTrafficLight
 {
 	Random rand = new Random();
 	public void doit() {
-		String SERVERHOST = "127.0.0.1";
+		String SERVERHOST = "localhost";
 	    int DEFAULT_PORT = 770;
 	    Socket clientSocket = null;
 	    BufferedReader bufferSocketIn = null;

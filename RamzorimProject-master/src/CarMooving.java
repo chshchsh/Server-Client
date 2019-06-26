@@ -25,7 +25,7 @@ public class CarMooving extends Thread
     private  int num;
     Socket clientSocket = null;
     PrintWriter bufferSocketOut;
-    String SERVERHOST = "127.0.0.1";
+    String SERVERHOST = "localhost";
     int DEFAULT_PORT = 770;
 	public CarMooving(JPanel myPanel, ShloshaAvot myRamzor,int key,int num, String numberTraffic,Socket clientSocket, PrintWriter bufferSocketOut)
 	{

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 //package Server770;
@@ -26,6 +27,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
     boolean[] takes = {false,false,false,false};
 	String choose = "צומת 1";
 	int place = 0;
+	private boolean notPress = true;
 
     public DialogWin770()
     {
@@ -120,18 +122,23 @@ public class DialogWin770 extends JFrame implements ActionListener{
 				}
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 1")) {
-			if(takes[place])
+			if(takes[place]) {
 			myDialog[place].bufferSocketOut.println("העבר למצב 1");
+			notPress = true;
+			}
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 2")) {
-			if(takes[place])
+			if(takes[place]) {
 				myDialog[place].bufferSocketOut.println("העבר למצב 2");
-
+				notPress = true;
+			}
 		}
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב 3")) {
-			if(takes[place])
+			if(takes[place]) {
 				myDialog[place].bufferSocketOut.println("העבר למצב 3");
-        }
+				notPress = true;
+			}
+			}
 		else if (((JButton) e.getSource()).getText().equals("כולם למצב 1")) {
 			for(int i = 0;i < 4;i++) {
         		if(takes[i]) {
@@ -142,6 +149,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
 						e1.printStackTrace();
 					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 1");
+    			notPress = true;
         		}
             	}
         }
@@ -155,6 +163,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
 						e1.printStackTrace();
 					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 2");
+    			notPress = true;
             	}
 			}
         }
@@ -168,6 +177,7 @@ public class DialogWin770 extends JFrame implements ActionListener{
 						e1.printStackTrace();
 					}
     			myDialog[i].bufferSocketOut.println("העבר למצב 3");
+    			notPress = true;
             	}
         	}
         }
@@ -188,8 +198,10 @@ public class DialogWin770 extends JFrame implements ActionListener{
 				takes[3] =  true;
 				break;
 			}
+			notPress =false;
         }
 		else if (((JButton) e.getSource()).getText().equals("הורד שליטה")) {
+			if(notPress) {
 			if(takes[place])
 			myDialog[place].bufferSocketOut.println("הורד שליטה");
 			switch (choose) {
@@ -206,16 +218,27 @@ public class DialogWin770 extends JFrame implements ActionListener{
 				takes[3] =  false;
 				break;
 			}
+			}
+			else
+				JOptionPane.showMessageDialog(title, "אי אפשר להוריד שליטה שהרמזורים לא עובדים העבר למצב מסויים!");
         }
 		else if (((JButton) e.getSource()).getText().equals("העבר למצב שבת")) {
+			if(notPress) {
         		if(takes[place])
     			myDialog[place].bufferSocketOut.println("העבר למצב שבת");
+			}
+			else
+				JOptionPane.showMessageDialog(title, "אי אפשר להעביר למצב שבת שהרמזורים לא עובדים העבר למצב מסויים!");
         }
 		else if (((JButton) e.getSource()).getText().equals("השבת מצב שבת")) {
+			if(notPress) {
     		if(takes[place]) {
 			myDialog[place].bufferSocketOut.println("השבת מצב שבת");
     		takes[place] = false;
     		}
+			}
+			else
+				JOptionPane.showMessageDialog(title, "אי אפשר להשבית מצב שבת שהרמזורים לא עובדים. העבר למצב מסויים!");
     }
 		}
 		

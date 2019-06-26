@@ -297,7 +297,6 @@ public class Controller  extends Thread
 							state = State.green2_3;
 							}
 							break;
-						
 						}
 					}
 					break;
@@ -445,8 +444,6 @@ public class Controller  extends Thread
 						evack5.waitEvent();evack2.waitEvent();
 						break; 
 					}
-					while(stop) {
-						if(changeStates.arrivedEvent()) {
 					    changeStates.waitEvent();
 					    stop=false;
 					    if(changeState1.arrivedEvent())
@@ -464,16 +461,6 @@ public class Controller  extends Thread
 							changeState3.waitEvent();
 							situation=Situation.state3;
 						}
-						}
-						if(changeRole.arrivedEvent()) {
-							changeRole.waitEvent();
-							stop = false;
-						}
-						if(evButtonShabat.arrivedEvent()) {
-							evButtonShabat.waitEvent();
-							stop = false;
-						}
-					}
 					while(!stop) {
 					switch(situation)
 					{
